@@ -18,4 +18,4 @@ jobs:
       - run: echo '${{ toJSON(steps.setup_node_id.outputs) }}'
       - if: ${{ steps.setup_node_id.outputs.cache-hit != 'true' }}
         run: yarn install
-      - run: yarn ls --depth=0
+      - run: npm ls --depth=0
