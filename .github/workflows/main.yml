@@ -23,9 +23,10 @@ jobs:
           path: '**/node_modules'
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-      # - name: 確認
-      #   run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
-      # - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-      - run: yarn install
-      - run: yarn list --depth=0
+      - name: 確認
+        run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        run: yarn install
+      - run: npm ls --depth=0
+
       - run: yarn build
