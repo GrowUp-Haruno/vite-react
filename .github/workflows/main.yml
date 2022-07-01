@@ -13,9 +13,9 @@ jobs:
       - uses: actions/setup-node@v3
         id: setup_node_id
         with:
-          node-version: '14'
-          cache: yarn
+          node-version: 14
+          cache: npm
       - run: echo '${{ toJSON(steps.setup_node_id.outputs) }}'
       - if: ${{ steps.setup_node_id.outputs.cache-hit != 'true' }}
-        run: yarn install
+        run: npm install
       - run: npm ls --depth=0
