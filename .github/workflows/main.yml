@@ -9,11 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - run: ls
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - run: yarn install
-      - run: yarn build
-      - run: ls
+          cache: yarn
+
+      - run: echo '${{ toJSON(steps.setup_node_id.outputs) }}'
+      - if: ${{ steps.setup_node_id.outputs.cache-hit != 'true' }}
+        run: yarn install
+      - run: yarn ls --depth=0
