@@ -21,11 +21,13 @@ jobs:
           cache-name: cache-node-modules
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
 
       - name: 確認
         run: echo '${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}'
-      # run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
+      
+      - name: 確認その２
+        run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
       # - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
       #   run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
       - run: yarn install
