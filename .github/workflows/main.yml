@@ -22,6 +22,8 @@ jobs:
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
       - run: echo '${{ toJSON(steps.node_modules_cache_id.outputs) }}'
       - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
-        run: npm install
+        run: yarn install
       - run: npm ls --depth=0
-      - run: npm ls -a
+      - run: ls -a
+      - run: yarn build
+      - run: ls -a
